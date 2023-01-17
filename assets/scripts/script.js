@@ -31,47 +31,43 @@ var generatePassword = function () {
   while (
     passwordCriteria.passwordLength < 8 ||
     passwordCriteria.passwordLength > 128
-    //add logic to make sure a number was entered
   ) {
     passwordCriteria.passwordLength = parseInt(
       prompt("Enter password length\n(Between 8-128 charecters)")
     );
   }
-  if (!passwordCriteria.passwordLength) {
-    return "error: Password generator canceled by user";
-  } else {
+  if (isNaN(passwordCriteria.passwordLength)) {
+    return "Invalid input or canceled by user";
+  } else  {
     // Ask user if we should include lowercase letters
     passwordCriteria.includeLowercase = confirm(
       "Do you want to include lowercase letters in your password?"
     );
-
+    // If true, add lowercase letters to the selected fields array
     if (passwordCriteria.includeLowercase) {
       selectedFields = [...selectedFields, ...lowercaseFields];
     }
-
     // Ask user if we should include uppercase letters
     passwordCriteria.includeUppercase = confirm(
       "Do you want to include uppercase letters in your password?"
     );
-
+    // If true, add uppercase letters to the selected fields array
     if (passwordCriteria.includeUppercase) {
       selectedFields = [...selectedFields, ...uppercaseFields];
     }
-
     // Ask user if we should include numbers
     passwordCriteria.includeNumeric = confirm(
       "Do you want to include numbers in your password?"
     );
-
+    // If true, add numbers to the selected fields array
     if (passwordCriteria.includeNumeric) {
       selectedFields = [...selectedFields, ...numericFields];
     }
-
     // Ask user if we should include special characters
     passwordCriteria.includeSpecial = confirm(
       "Do you want to include special characters in your password?"
     );
-
+    // If true, add special characters to the selected fields array
     if (passwordCriteria.includeSpecial) {
       selectedFields = [...selectedFields, ...specialFields];
     }
@@ -81,10 +77,6 @@ var generatePassword = function () {
 
 function resetCriteria() {
   passwordCriteria.passwordLength = 0;
-  passwordCriteria.includeLowercase = false;
-  passwordCriteria.includeUppercase = false;
-  passwordCriteria.includeNumeric = false;
-  passwordCriteria.includeSpecial = false;
   selectedFields = [];
 }
 
